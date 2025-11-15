@@ -124,8 +124,16 @@
             text-align: center;
             font-size: 18px;
             color: #8b6f5c;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
             font-weight: 500;
+        }
+
+        .gallery > span {
+            display: block;
+            text-align: center;
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 20px;
         }
 
         .gallery-grid {
@@ -204,6 +212,117 @@
             background: #6d5644;
         }
 
+        .calendar-section {
+            padding: 40px 30px;
+            background: white;
+        }
+
+        .calendar-section h3 {
+            text-align: center;
+            font-size: 18px;
+            color: #8b6f5c;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .calendar-card {
+            max-width: 400px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #fff5f0 0%, #ffe8f0 100%);
+            border-radius: 16px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 4px 15px rgba(139, 111, 92, 0.15);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .calendar-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(139, 111, 92, 0.25);
+        }
+
+        .calendar-icon {
+            background: white;
+            border-radius: 12px;
+            width: 80px;
+            height: 85px;
+            flex-shrink: 0;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .calendar-header {
+            background: #8b6f5c;
+            color: white;
+            text-align: center;
+            padding: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .calendar-date {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: #333;
+            padding: 5px 0;
+            line-height: 1;
+        }
+
+        .calendar-day {
+            text-align: center;
+            font-size: 11px;
+            color: #8b6f5c;
+            font-weight: 600;
+            padding-bottom: 5px;
+        }
+
+        .calendar-details {
+            flex: 1;
+        }
+
+        .calendar-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #8b6f5c;
+            margin-bottom: 8px;
+        }
+
+        .calendar-time {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .calendar-location {
+            font-size: 13px;
+            color: #888;
+        }
+
+        .calendar-add-btn {
+            width: 40px;
+            height: 40px;
+            background: #8b6f5c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            font-weight: 300;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .calendar-card:hover .calendar-add-btn {
+            background: #6d5644;
+            transform: rotate(90deg);
+        }
+
         .map-section {
             padding: 40px 30px;
             background: white;
@@ -250,7 +369,7 @@
             cursor: pointer;
             transition: all 0.3s;
             text-decoration: none;
-            text-align:center;
+            text-align: center;
         }
 
         .map-btn:hover {
@@ -273,7 +392,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.95);
             z-index: 1000;
             align-items: center;
             justify-content: center;
@@ -284,24 +403,136 @@
         }
 
         .modal-content {
-            max-width: 90%;
-            max-height: 90%;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px 20px;
+        }
+
+        .modal-image-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: none;
+            overflow: hidden;
         }
 
         .modal-content img {
-            width: 100%;
+            max-width: 90vw;
+            max-height: 80vh;
+            width: auto;
             height: auto;
+            object-fit: contain;
             border-radius: 8px;
+            transition: transform 0.3s ease;
+            cursor: grab;
+        }
+
+        .modal-content img.dragging {
+            cursor: grabbing;
         }
 
         .close-modal {
-            position: absolute;
+            position: fixed;
             top: 20px;
-            right: 30px;
-            font-size: 40px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
             color: white;
             cursor: pointer;
-            z-index: 1001;
+            z-index: 1002;
+            transition: background 0.3s;
+        }
+
+        .close-modal:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .modal-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1002;
+            transition: all 0.3s;
+            user-select: none;
+        }
+
+        .modal-nav:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .modal-nav.prev {
+            left: 20px;
+        }
+
+        .modal-nav.next {
+            right: 20px;
+        }
+
+        .modal-counter {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            z-index: 1002;
+        }
+
+        .zoom-controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 1002;
+        }
+
+        .zoom-btn {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .zoom-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
         }
 
         .toast {
@@ -330,17 +561,17 @@
         <h1>WEDDING INVITATION</h1>
         <div class="divider"></div>
         <div class="main-title">이종휘 ♥ 허채림</div>
-        <div class="date-info">2024년 12월 14일 토요일 오후 2시</div>
+        <div class="date-info">2025년 2월 21일 토요일 오후 2시</div>
     </div>
 
     <div class="invitation-text">
-        서로가 마주보며 다져온 사랑을<br>
-        이제 함께 한 곳을 바라보며<br>
-        걸어갈 수 있는 큰 사랑으로 키우고자 합니다.<br>
+        이천일의 만남을 종료하고 새로운 시작을 하려합니다.<br>
         <br>
-        저희 두 사람이 사랑의 이름으로<br>
-        지켜나갈 수 있게<br>
-        앞날을 축복해 주시면 감사하겠습니다.
+        서로의 손을 잡고<br>
+        작은 일상들을 다정하게 살아가겠습니다.<br>
+        <br>
+        그 시작의 순간에<br>
+        함께 자리를 빛내주세요.<br>
     </div>
 
     <div class="family-info">
@@ -361,24 +592,64 @@
 
     <div class="gallery">
         <h3>Gallery</h3>
+        <span>사진은 스튜디오 사진 나오면 업데이트 할게요</span>
         <div class="gallery-grid">
             <div class="gallery-item" onclick="openModal(0)">
-                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400" alt="사진 1">
+                <img src="./assets/image-1.jpg" alt="사진 1">
             </div>
             <div class="gallery-item" onclick="openModal(1)">
-                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400" alt="사진 2">
+                <img src="./assets/image-2.jpg" alt="사진 2">
             </div>
             <div class="gallery-item" onclick="openModal(2)">
-                <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=400" alt="사진 3">
+                <img src="./assets/image-3.jpg" alt="사진 3">
             </div>
             <div class="gallery-item" onclick="openModal(3)">
-                <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=400" alt="사진 4">
+                <img src="./assets/image-4.jpg" alt="사진 4">
             </div>
             <div class="gallery-item" onclick="openModal(4)">
-                <img src="https://images.unsplash.com/photo-1594241929829-7fed93c32c87?w=400" alt="사진 5">
+                <img src="./assets/image-5.jpg" alt="사진 5">
             </div>
             <div class="gallery-item" onclick="openModal(5)">
-                <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=400" alt="사진 6">
+                <img src="./assets/image-6.jpg" alt="사진 6">
+            </div>
+            <div class="gallery-item" onclick="openModal(6)">
+                <img src="./assets/image-7.jpg" alt="사진 7">
+            </div>
+            <div class="gallery-item" onclick="openModal(7)">
+                <img src="./assets/image-8.jpg" alt="사진 8">
+            </div>
+            <div class="gallery-item" onclick="openModal(8)">
+                <img src="./assets/image-9.jpg" alt="사진 9">
+            </div>
+            <div class="gallery-item" onclick="openModal(9)">
+                <img src="./assets/image-10.jpg" alt="사진 10">
+            </div>
+            <div class="gallery-item" onclick="openModal(10)">
+                <img src="./assets/image-11.jpg" alt="사진 11">
+            </div>
+            <div class="gallery-item" onclick="openModal(11)">
+                <img src="./assets/image-12.jpg" alt="사진 12">
+            </div>
+            <div class="gallery-item" onclick="openModal(12)">
+                <img src="./assets/image-13.jpg" alt="사진 13">
+            </div>
+            <div class="gallery-item" onclick="openModal(13)">
+                <img src="./assets/image-14.png" alt="사진 14">
+            </div>
+            <div class="gallery-item" onclick="openModal(14)">
+                <img src="./assets/image-15.png" alt="사진 15">
+            </div>
+            <div class="gallery-item" onclick="openModal(15)">
+                <img src="./assets/image-16.jpg" alt="사진 16">
+            </div>
+            <div class="gallery-item" onclick="openModal(16)">
+                <img src="./assets/image-17.jpg" alt="사진 17">
+            </div>
+            <div class="gallery-item" onclick="openModal(17)">
+                <img src="./assets/image-18.jpg" alt="사진 18">
+            </div>
+            <div class="gallery-item" onclick="openModal(18)">
+                <img src="./assets/image-19.jpg" alt="사진 19">
             </div>
         </div>
     </div>
@@ -425,11 +696,23 @@
         </div>
     </div>
 
-    <div class="calendar-section" style="padding: 40px 30px; background: white; text-align: center;">
-        <h3 style="font-size: 18px; color: #8b6f5c; margin-bottom: 20px; font-weight: 500;">캘린더에 일정 추가</h3>
-        <button class="map-btn" onclick="addToCalendar()" style="max-width: 300px; width: 100%; margin: 0 auto; display: block;">
-            📅 캘린더에 추가하기
-        </button>
+    <div class="calendar-section">
+        <h3>캘린더에 일정 추가</h3>
+        <div class="calendar-card" onclick="addToCalendar()">
+            <div class="calendar-icon">
+                <div class="calendar-header">FEB</div>
+                <div class="calendar-date">21</div>
+                <div class="calendar-day">SAT</div>
+            </div>
+            <div class="calendar-details">
+                <div class="calendar-title">이종휘 ♥ 허채림 결혼식</div>
+                <div class="calendar-time">🕐 오후 2:00</div>
+                <div class="calendar-location">📍 부천 채림웨딩홀</div>
+            </div>
+            <div class="calendar-add-btn">
+                <span>+</span>
+            </div>
+        </div>
     </div>
 
     <div class="map-section">
@@ -443,17 +726,8 @@
             로얄쇼핑주차장 (채림웨딩홀 전용주차장) 약 3시간 무료
         </div>
         <div class="map-container">
-            <!-- * 카카오맵 - 지도퍼가기 -->
-            <!-- 1. 지도 노드 -->
             <div id="daumRoughmapContainer1763210314253" class="root_daum_roughmap root_daum_roughmap_landing"></div>
-
-            <!--
-                2. 설치 스크립트
-                * 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
-            -->
             <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
-
-            <!-- 3. 실행 스크립트 -->
             <script charset="UTF-8">
                 new daum.roughmap.Lander({
                     "timestamp" : "1763210314253",
@@ -476,10 +750,20 @@
     </div>
 </div>
 
-<div class="modal" id="imageModal" onclick="closeModal()">
-    <span class="close-modal">&times;</span>
-    <div class="modal-content">
-        <img id="modalImage" src="" alt="확대 이미지">
+<div class="modal" id="imageModal">
+    <div class="modal-counter" id="modalCounter">1 / 19</div>
+    <span class="close-modal" onclick="closeModal(event)">×</span>
+    <div class="modal-nav prev" onclick="prevImage(event)">‹</div>
+    <div class="modal-nav next" onclick="nextImage(event)">›</div>
+    <div class="modal-content" onclick="closeModal(event)">
+        <div class="modal-image-container">
+            <img id="modalImage" src="" alt="확대 이미지">
+        </div>
+    </div>
+    <div class="zoom-controls">
+        <button class="zoom-btn" onclick="zoomOut(event)">−</button>
+        <button class="zoom-btn" onclick="resetZoom(event)">⟲</button>
+        <button class="zoom-btn" onclick="zoomIn(event)">+</button>
     </div>
 </div>
 
@@ -487,25 +771,192 @@
 
 <script>
     const images = [
-        'https://images.unsplash.com/photo-1519741497674-611481863552?w=800',
-        'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800',
-        'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800',
-        'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=800',
-        'https://images.unsplash.com/photo-1594241929829-7fed93c32c87?w=800',
-        'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800'
+        './assets/image-1.jpg',
+        './assets/image-2.jpg',
+        './assets/image-3.jpg',
+        './assets/image-4.jpg',
+        './assets/image-5.jpg',
+        './assets/image-6.jpg',
+        './assets/image-7.jpg',
+        './assets/image-8.jpg',
+        './assets/image-9.jpg',
+        './assets/image-10.jpg',
+        './assets/image-11.jpg',
+        './assets/image-12.jpg',
+        './assets/image-13.jpg',
+        './assets/image-14.png',
+        './assets/image-15.png',
+        './assets/image-16.jpg',
+        './assets/image-17.jpg',
+        './assets/image-18.jpg',
+        './assets/image-19.jpg',
     ];
 
+    let currentImageIndex = 0;
+    let currentZoom = 1;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let translateX = 0;
+    let translateY = 0;
+
     function openModal(index) {
+        currentImageIndex = index;
+        currentZoom = 1;
+        translateX = 0;
+        translateY = 0;
+        updateModalImage();
         const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImage');
-        modalImg.src = images[index];
         modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
     }
 
-    function closeModal() {
+    function closeModal(event) {
+        if (event) {
+            event.stopPropagation();
+            if (event.target.tagName === 'IMG' ||
+                event.target.closest('.zoom-controls') ||
+                event.target.closest('.modal-nav') ||
+                event.target.closest('.modal-image-container')) {
+                return;
+            }
+        }
         const modal = document.getElementById('imageModal');
         modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        currentZoom = 1;
+        translateX = 0;
+        translateY = 0;
     }
+
+    function updateModalImage() {
+        const modalImg = document.getElementById('modalImage');
+        const counter = document.getElementById('modalCounter');
+        modalImg.src = images[currentImageIndex];
+        modalImg.style.objectFit = 'contain';
+        counter.textContent = `${currentImageIndex + 1} / ${images.length}`;
+        modalImg.style.transform = `scale(${currentZoom}) translate(${translateX}px, ${translateY}px)`;
+    }
+
+    function prevImage(event) {
+        event.stopPropagation();
+        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+        currentZoom = 1;
+        translateX = 0;
+        translateY = 0;
+        updateModalImage();
+    }
+
+    function nextImage(event) {
+        event.stopPropagation();
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        currentZoom = 1;
+        translateX = 0;
+        translateY = 0;
+        updateModalImage();
+    }
+
+    function zoomIn(event) {
+        event.stopPropagation();
+        if (currentZoom < 3) {
+            currentZoom += 0.3;
+            updateModalImage();
+        }
+    }
+
+    function zoomOut(event) {
+        event.stopPropagation();
+        if (currentZoom > 0.5) {
+            currentZoom -= 0.3;
+            if (currentZoom <= 1) {
+                currentZoom = 1;
+                translateX = 0;
+                translateY = 0;
+            }
+            updateModalImage();
+        }
+    }
+
+    function resetZoom(event) {
+        event.stopPropagation();
+        currentZoom = 1;
+        translateX = 0;
+        translateY = 0;
+        updateModalImage();
+    }
+
+    const modalImage = document.getElementById('modalImage');
+
+    modalImage.addEventListener('mousedown', startDrag);
+    modalImage.addEventListener('touchstart', startDrag);
+
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('touchmove', drag);
+
+    document.addEventListener('mouseup', endDrag);
+    document.addEventListener('touchend', endDrag);
+
+    function startDrag(e) {
+        if (currentZoom <= 1) return;
+
+        isDragging = true;
+        modalImage.classList.add('dragging');
+
+        const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+
+        startX = clientX - translateX;
+        startY = clientY - translateY;
+
+        e.preventDefault();
+    }
+
+    function drag(e) {
+        if (!isDragging) return;
+
+        const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+
+        translateX = clientX - startX;
+        translateY = clientY - startY;
+
+        updateModalImage();
+        e.preventDefault();
+    }
+
+    function endDrag() {
+        isDragging = false;
+        modalImage.classList.remove('dragging');
+    }
+
+    document.addEventListener('keydown', (e) => {
+        const modal = document.getElementById('imageModal');
+        if (!modal.classList.contains('active')) return;
+
+        if (e.key === 'Escape') {
+            closeModal();
+        } else if (e.key === 'ArrowLeft') {
+            prevImage(e);
+        } else if (e.key === 'ArrowRight') {
+            nextImage(e);
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn(e);
+        } else if (e.key === '-') {
+            zoomOut(e);
+        }
+    });
+
+    modalImage.addEventListener('dblclick', (e) => {
+        e.stopPropagation();
+        if (currentZoom === 1) {
+            currentZoom = 2;
+        } else {
+            currentZoom = 1;
+            translateX = 0;
+            translateY = 0;
+        }
+        updateModalImage();
+    });
 
     function copyAccount(accountNumber) {
         navigator.clipboard.writeText(accountNumber).then(() => {
@@ -524,25 +975,14 @@
         }, 2000);
     }
 
-    function openNaverMap() {
-        window.open('https://map.naver.com/p/search/강남구%20테헤란로%20123', '_blank');
-    }
-
-    function openKakaoMap() {
-        window.open('https://map.kakao.com/link/search/강남구%20테헤란로%20123', '_blank');
-    }
-
     function addToCalendar() {
-        // 결혼식 일정 정보
         const eventTitle = '이종휘 허채림 결혼식';
         const eventLocation = '부천채림웨딩홀 (경기 부천시 원미구 부천로 3-1)';
         const eventDescription = '시간 내주셔서 감사드립니다.';
 
-        // 2024년 12월 14일 토요일 오후 2시 (14:00)
-        const startDate = '20260221T140000';
-        const endDate = '20260221T160000'; // 2시간 후 (16:00)
+        const startDate = '20250221T140000';
+        const endDate = '20250221T160000';
 
-        // ICS 파일 내용 생성 (iCalendar 형식)
         const icsContent = [
             'BEGIN:VCALENDAR',
             'VERSION:2.0',
@@ -558,7 +998,7 @@
             'STATUS:CONFIRMED',
             'SEQUENCE:0',
             'BEGIN:VALARM',
-            'TRIGGER:-PT1H', // 1시간 전 알림
+            'TRIGGER:-PT1H',
             'ACTION:DISPLAY',
             'DESCRIPTION:결혼식 1시간 전입니다',
             'END:VALARM',
@@ -566,30 +1006,14 @@
             'END:VCALENDAR'
         ].join('\r\n');
 
-        // Blob 생성 및 다운로드
         const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
         link.download = '결혼식_일정.ics';
-
-        // iOS Safari를 위한 처리
-        // if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-        //     // iOS에서는 파일 다운로드 대신 캘린더 URL 열기
-        //     const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
-        //         '&text=' + encodeURIComponent(eventTitle) +
-        //         '&dates=' + startDate + '/' + endDate +
-        //         '&details=' + encodeURIComponent(eventDescription) +
-        //         '&location=' + encodeURIComponent(eventLocation);
-        //
-        //     window.open(googleCalendarUrl, '_blank');
-        //     showToast('Google 캘린더로 연결됩니다.');
-        // } else {
-            // 안드로이드 및 데스크탑에서는 ICS 파일 다운로드
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            showToast('캘린더 파일이 다운로드되었습니다.');
-        // }
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        showToast('캘린더 파일이 다운로드되었습니다.');
     }
 </script>
 </body>
