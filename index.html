@@ -573,23 +573,23 @@
         link.download = '결혼식_일정.ics';
 
         // iOS Safari를 위한 처리
-        if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-            // iOS에서는 파일 다운로드 대신 캘린더 URL 열기
-            const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
-                '&text=' + encodeURIComponent(eventTitle) +
-                '&dates=' + startDate + '/' + endDate +
-                '&details=' + encodeURIComponent(eventDescription) +
-                '&location=' + encodeURIComponent(eventLocation);
-
-            window.open(googleCalendarUrl, '_blank');
-            showToast('Google 캘린더로 연결됩니다.');
-        } else {
+        // if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+        //     // iOS에서는 파일 다운로드 대신 캘린더 URL 열기
+        //     const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+        //         '&text=' + encodeURIComponent(eventTitle) +
+        //         '&dates=' + startDate + '/' + endDate +
+        //         '&details=' + encodeURIComponent(eventDescription) +
+        //         '&location=' + encodeURIComponent(eventLocation);
+        //
+        //     window.open(googleCalendarUrl, '_blank');
+        //     showToast('Google 캘린더로 연결됩니다.');
+        // } else {
             // 안드로이드 및 데스크탑에서는 ICS 파일 다운로드
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
             showToast('캘린더 파일이 다운로드되었습니다.');
-        }
+        // }
     }
 </script>
 </body>
