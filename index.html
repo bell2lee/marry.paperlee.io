@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>모바일 청첩장</title>
+    <title>이종휘와 허채림의 결혼식에 초대합니다</title>
+    <meta name="description" content="26년 2월 21일 2시 부천 채림웨딩홀 에서"/>
+    <meta property="og:image" content="./assets/image-1.jpg"/>
     <style>
         * {
             margin: 0;
@@ -52,6 +54,17 @@
             margin: 15px 0;
         }
 
+        .d-day {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #8b6f5c, #a68973);
+            color: white;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
         .divider {
             width: 50px;
             height: 1px;
@@ -94,25 +107,6 @@
         .parent-name {
             margin: 5px 0;
             color: #666;
-        }
-
-        .couple-names {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            margin-top: 30px;
-            font-size: 20px;
-            color: #8b6f5c;
-        }
-
-        .couple-names span {
-            font-weight: 500;
-        }
-
-        .heart {
-            color: #ffb6c1;
-            font-size: 16px;
         }
 
         .gallery {
@@ -377,6 +371,45 @@
             color: white;
         }
 
+        .bus-info {
+            background: linear-gradient(135deg, #fff9f5 0%, #fff5eb 100%);
+            border-radius: 16px;
+            padding: 20px 25px;
+            margin: 0 auto 25px;
+            max-width: 400px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 3px 12px rgba(139, 111, 92, 0.1);
+        }
+
+        .bus-icon {
+            font-size: 40px;
+            flex-shrink: 0;
+        }
+
+        .bus-details {
+            flex: 1;
+        }
+
+        .bus-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #8b6f5c;
+            margin-bottom: 8px;
+        }
+
+        .bus-route {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .bus-time {
+            font-size: 14px;
+            color: #888;
+        }
+
         .footer {
             text-align: center;
             padding: 40px 30px;
@@ -506,33 +539,7 @@
         }
 
         .zoom-controls {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-            z-index: 1002;
-        }
-
-        .zoom-btn {
-            width: 45px;
-            height: 45px;
-            background: rgba(255,255,255,0.2);
-            border: none;
-            border-radius: 50%;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .zoom-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: scale(1.1);
+            display: none;
         }
 
         .toast {
@@ -561,7 +568,8 @@
         <h1>WEDDING INVITATION</h1>
         <div class="divider"></div>
         <div class="main-title">이종휘 ♥ 허채림</div>
-        <div class="date-info">2025년 2월 21일 토요일 오후 2시</div>
+        <div class="date-info">2026년 2월 21일 토요일 오후 2시</div>
+        <div class="d-day" id="dday"></div>
     </div>
 
     <div class="invitation-text">
@@ -725,6 +733,16 @@
             <br>
             로얄쇼핑주차장 (채림웨딩홀 전용주차장) 약 3시간 무료
         </div>
+
+        <div class="bus-info">
+            <div class="bus-icon">🚌</div>
+            <div class="bus-details">
+                <div class="bus-title">전세버스 안내</div>
+                <div class="bus-route">포항 → 부천</div>
+                <div class="bus-time">📍 포항역 출발 오전 9시</div>
+            </div>
+        </div>
+
         <div class="map-container">
             <div id="daumRoughmapContainer1763210314253" class="root_daum_roughmap root_daum_roughmap_landing"></div>
             <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
@@ -760,16 +778,35 @@
             <img id="modalImage" src="" alt="확대 이미지">
         </div>
     </div>
-    <div class="zoom-controls">
-        <button class="zoom-btn" onclick="zoomOut(event)">−</button>
-        <button class="zoom-btn" onclick="resetZoom(event)">⟲</button>
-        <button class="zoom-btn" onclick="zoomIn(event)">+</button>
-    </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
+    // 디데이 계산
+    function updateDday() {
+        const weddingDate = new Date('2026-02-21T14:00:00');
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        weddingDate.setHours(0, 0, 0, 0);
+
+        const diffTime = weddingDate - today;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        const ddayElement = document.getElementById('dday');
+
+        if (diffDays > 0) {
+            ddayElement.textContent = `D-${diffDays}`;
+        } else if (diffDays === 0) {
+            ddayElement.textContent = 'D-Day';
+        } else {
+            ddayElement.textContent = `D+${Math.abs(diffDays)}`;
+        }
+    }
+
+    // 페이지 로드 시 디데이 업데이트
+    updateDday();
+
     const images = [
         './assets/image-1.jpg',
         './assets/image-2.jpg',
@@ -793,18 +830,13 @@
     ];
 
     let currentImageIndex = 0;
-    let currentZoom = 1;
     let isDragging = false;
-    let startX = 0;
-    let startY = 0;
-    let translateX = 0;
-    let translateY = 0;
+    let swipeStartX = 0;
+    let swipeStartY = 0;
+    let swipeThreshold = 50;
 
     function openModal(index) {
         currentImageIndex = index;
-        currentZoom = 1;
-        translateX = 0;
-        translateY = 0;
         updateModalImage();
         const modal = document.getElementById('imageModal');
         modal.classList.add('active');
@@ -815,7 +847,6 @@
         if (event) {
             event.stopPropagation();
             if (event.target.tagName === 'IMG' ||
-                event.target.closest('.zoom-controls') ||
                 event.target.closest('.modal-nav') ||
                 event.target.closest('.modal-image-container')) {
                 return;
@@ -824,64 +855,24 @@
         const modal = document.getElementById('imageModal');
         modal.classList.remove('active');
         document.body.style.overflow = 'auto';
-        currentZoom = 1;
-        translateX = 0;
-        translateY = 0;
     }
 
     function updateModalImage() {
         const modalImg = document.getElementById('modalImage');
         const counter = document.getElementById('modalCounter');
         modalImg.src = images[currentImageIndex];
-        modalImg.style.objectFit = 'contain';
         counter.textContent = `${currentImageIndex + 1} / ${images.length}`;
-        modalImg.style.transform = `scale(${currentZoom}) translate(${translateX}px, ${translateY}px)`;
     }
 
     function prevImage(event) {
         event.stopPropagation();
         currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-        currentZoom = 1;
-        translateX = 0;
-        translateY = 0;
         updateModalImage();
     }
 
     function nextImage(event) {
         event.stopPropagation();
         currentImageIndex = (currentImageIndex + 1) % images.length;
-        currentZoom = 1;
-        translateX = 0;
-        translateY = 0;
-        updateModalImage();
-    }
-
-    function zoomIn(event) {
-        event.stopPropagation();
-        if (currentZoom < 3) {
-            currentZoom += 0.3;
-            updateModalImage();
-        }
-    }
-
-    function zoomOut(event) {
-        event.stopPropagation();
-        if (currentZoom > 0.5) {
-            currentZoom -= 0.3;
-            if (currentZoom <= 1) {
-                currentZoom = 1;
-                translateX = 0;
-                translateY = 0;
-            }
-            updateModalImage();
-        }
-    }
-
-    function resetZoom(event) {
-        event.stopPropagation();
-        currentZoom = 1;
-        translateX = 0;
-        translateY = 0;
         updateModalImage();
     }
 
@@ -897,34 +888,36 @@
     document.addEventListener('touchend', endDrag);
 
     function startDrag(e) {
-        if (currentZoom <= 1) return;
-
-        isDragging = true;
-        modalImage.classList.add('dragging');
-
         const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
         const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
 
-        startX = clientX - translateX;
-        startY = clientY - translateY;
-
-        e.preventDefault();
+        swipeStartX = clientX;
+        swipeStartY = clientY;
     }
 
     function drag(e) {
-        if (!isDragging) return;
-
-        const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-        const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
-
-        translateX = clientX - startX;
-        translateY = clientY - startY;
-
-        updateModalImage();
-        e.preventDefault();
+        // 드래그 기능 제거
     }
 
-    function endDrag() {
+    function endDrag(e) {
+        const clientX = e.type.includes('touch') ?
+            (e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientX : swipeStartX) :
+            e.clientX;
+        const clientY = e.type.includes('touch') ?
+            (e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientY : swipeStartY) :
+            e.clientY;
+
+        const swipeDistanceX = clientX - swipeStartX;
+        const swipeDistanceY = Math.abs(clientY - swipeStartY);
+
+        if (Math.abs(swipeDistanceX) > swipeThreshold && swipeDistanceY < swipeThreshold * 2) {
+            if (swipeDistanceX > 0) {
+                prevImage(e);
+            } else {
+                nextImage(e);
+            }
+        }
+
         isDragging = false;
         modalImage.classList.remove('dragging');
     }
@@ -939,23 +932,7 @@
             prevImage(e);
         } else if (e.key === 'ArrowRight') {
             nextImage(e);
-        } else if (e.key === '+' || e.key === '=') {
-            zoomIn(e);
-        } else if (e.key === '-') {
-            zoomOut(e);
         }
-    });
-
-    modalImage.addEventListener('dblclick', (e) => {
-        e.stopPropagation();
-        if (currentZoom === 1) {
-            currentZoom = 2;
-        } else {
-            currentZoom = 1;
-            translateX = 0;
-            translateY = 0;
-        }
-        updateModalImage();
     });
 
     function copyAccount(accountNumber) {
@@ -980,8 +957,8 @@
         const eventLocation = '부천채림웨딩홀 (경기 부천시 원미구 부천로 3-1)';
         const eventDescription = '시간 내주셔서 감사드립니다.';
 
-        const startDate = '20250221T140000';
-        const endDate = '20250221T160000';
+        const startDate = '20260221T140000';
+        const endDate = '20260221T160000';
 
         const icsContent = [
             'BEGIN:VCALENDAR',
